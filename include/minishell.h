@@ -24,6 +24,7 @@ void			increment_shlvl(t_shell *sh);
 int				interactive_shell(t_shell *sh);
 void			clear_prompt(t_shell *sh);
 char			*prompt_listener(t_prompt_mode mode);
+char			*non_interactive_input(void);
 
 // Prompt Execution
 int				prompt_execution(char *input, t_shell *sh);

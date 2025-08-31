@@ -47,25 +47,55 @@ void	clear_prompt(t_shell *sh)
 	sh->parsing_error = NULL;
 }
 
+/*
+ * Handles input differently for interactive vs non-interactive mode:
+ * - Interactive (terminal): uses readline with prompt
+ * - Non-interactive (tester): uses separate function
+ */
 char	*prompt_listener(t_prompt_mode mode)
 {
 	char	*user_input;
 
 	g_signal_value = 0;
 	user_input = NULL;
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	if (mode == MAIN_PROMPT)
+	if (isatty(fileno(stdin)))
 	{
-		set_signal_prompt();
-		user_input = readline("\x1b[32mminishell$ \x1b[0m");
-		set_signal_main_process();
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		if (mode == MAIN_PROMPT)
+		{
+			set_signal_prompt();
+			user_input = readline("\x1b[32mminishell$ \x1b[0m");
+			set_signal_main_process();
+		}
+		else if (mode == HEREDOC_PROMPT)
+		{
+			set_signal_heredoc();
+			user_input = readline("> ");
+			set_signal_main_process();
+		}
 	}
-	else if (mode == HEREDOC_PROMPT)
+	else
 	{
-		set_signal_heredoc();
-		user_input = readline("> ");
-		set_signal_main_process();
+		user_input = non_interactive_input();
 	}
 	return (user_input);
 }
+
+/*
+ * Non-interactive input handler for testing purposes
+ * Uses fgets without prompt to be compatible with testers
+ */
+char	*non_interactive_input(void)
+{
+	char	buffer[1024];
+	char	*line;
+	
+	if (!fgets(buffer, sizeof(buffer), stdin))
+		return (NULL);
+	line = ft_strtrim(buffer, "\n");
+	if (!line)
+		return (NULL);
+	return (line);
+}
+
