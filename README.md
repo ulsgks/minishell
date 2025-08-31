@@ -13,12 +13,9 @@ Built with the latest bash version: [GNU bash, version 5.2.21(1)-release (x86_64
 Made by [Florent](https://github.com/SarKaZm19) & [Ulysse](https://github.com/ulyssegerkens)<br>
 
 ## 🚀 Set-up
-To keep the GitHub repository tidy and to avoid displaying library code, the lib directory is archived. Follow the steps below to set up and run the project:
-1. Decompress the Libraries: `tar xzf lib.tar.gz && rm -rf lib.tar.gz`<br>
-    If needed, to re-archive: `tar czf lib.tar.gz lib/ && rm -rf lib/`
-2. Install readline library via [homebrew](https://github.com/kube/42homebrew): `brew install readline`
-3. Compile the Project: `make`
-4. Run the Project: `./minishell`
+1. Install readline library via [homebrew](https://github.com/kube/42homebrew): `brew install readline`
+2. Compile the Project: `make` (libraries are automatically extracted from archive)
+3. Run the Project: `./minishell`
 
 ## ✨ What makes this minishell special?
 - *Fidelity*: built directly on the bash manual and some POSIX standards.
