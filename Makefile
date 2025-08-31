@@ -19,7 +19,8 @@ NAME			=	minishell
 # Libraries
 LIBFT_DIR		=	lib/libft
 LIBFT			=	$(LIBFT_DIR)/libft.a
-READLINE_DIR	=	$(HOME)/.brew/opt/readline
+LIB_ARCHIVE		=	lib.tar.gz
+READLINE_DIR	=	$(shell brew --prefix readline)
 READLINE_LIB	=	-L$(READLINE_DIR)/lib -lreadline
 
 # Include directories
@@ -71,8 +72,11 @@ all:			$(NAME)
 $(NAME):		$(LIBFT) $(OBJ_DIR_NAME) $(OBJ)
 				$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
 
-$(LIBFT):
+$(LIBFT):		lib/
 				$(MAKE) --no-print-directory -C $(LIBFT_DIR)
+
+lib/:			$(LIB_ARCHIVE)
+				tar xzf $(LIB_ARCHIVE)
 
 $(OBJ_DIR_NAME):
 				mkdir -p $(OBJ_DIR_NAME)
@@ -86,7 +90,7 @@ clean:
 
 fclean:			clean
 				$(MAKE) --no-print-directory -C $(LIBFT_DIR) fclean
-				$(RM) $(NAME)
+				$(RM) $(NAME) lib
 
 re:				fclean all
 
