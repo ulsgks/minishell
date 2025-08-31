@@ -14,7 +14,7 @@ Before everything and during everything, read the [bash manual](https://www.gnu.
 - Introduction: [Parsing - Computerphile](https://www.youtube.com/watch?v=r6vNthpQtSI&pp=ygUMaG93IHRvIHBhcnNl)
 - [Parsing Guide](https://craftinginterpreters.com/parsing-expressions.html).
 - [Recursive Descent Parsing](https://en.wikipedia.org/wiki/Recursive_descent_parser)
-- [POSIX Grammar adapted for Minishell](todo path to Gramard.md).
+- [POSIX Grammar adapted for Minishell](docs/grammar.md).
 
 ## Process
 - The pipeline and redirection has been built from this project: [github.com/ulyssegerkens/pipex](https://github.com/ulyssegerkens/pipex)

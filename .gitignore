@@ -1,0 +1,5 @@
+.DS_Store
+/lib
+/42_minishell_tester
+/build
+minishell
