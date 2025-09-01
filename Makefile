@@ -20,11 +20,22 @@ NAME			=	minishell
 LIBFT_DIR		=	lib/libft
 LIBFT			=	$(LIBFT_DIR)/libft.a
 LIB_ARCHIVE		=	lib.tar.gz
-READLINE_DIR	=	$(shell brew --prefix readline)
-READLINE_LIB	=	-L$(READLINE_DIR)/lib -lreadline
+
+# OS Detection and readline configuration
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	# macOS - use brew readline
+	READLINE_DIR	=	$(shell brew --prefix readline 2>/dev/null || echo /usr/local/opt/readline)
+	READLINE_LIB	=	-L$(READLINE_DIR)/lib -lreadline
+	READLINE_INC	=	$(READLINE_DIR)/include/readline
+else
+	# Linux - use system readline
+	READLINE_LIB	=	-lreadline
+	READLINE_INC	=	
+endif
 
 # Include directories
-INC_DIRS		=	include src $(LIBFT_DIR)/include $(READLINE_DIR)/include/readline
+INC_DIRS		=	include src $(LIBFT_DIR)/include $(READLINE_INC)
 CFLAGS			+=	$(addprefix -I, $(INC_DIRS))
 LDFLAGS			=	-L$(LIBFT_DIR) -lft $(READLINE_LIB)
 

@@ -17,7 +17,8 @@ sig_atomic_t	g_signal_value = 0;
 void	sigint_prompt(int signum)
 {
 	g_signal_value = signum;
-	write(1, "\n", 1);
+	if (write(1, "\n", 1) == -1)
+		return;
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();

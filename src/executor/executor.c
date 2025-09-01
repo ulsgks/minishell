@@ -16,6 +16,7 @@ int	execute(t_ast *node, t_execute_end end, t_shell *sh)
 {
 	int	status;
 
+	status = EXIT_SUCCESS;
 	if (!node)
 		return (EXIT_SUCCESS);
 	if (node->type == AST_REDIRECTION || node->type == AST_COMMAND)
