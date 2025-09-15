@@ -34,7 +34,7 @@ int	execute(t_ast *node, t_execute_end end, t_shell *sh)
 	else
 		error("execute", "illegal node type", EXIT_FAILURE, sh);
 	if (end == O_EXIT)
-		exit(status);
+		quit_shell(status, sh);
 	return (status);
 }
 
